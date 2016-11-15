@@ -37,12 +37,17 @@ var logger = new LoggerConfiguration()
 ```
 In your application's App.config or Web.config file, specify the `AzureLogAnalytics` sink assembly and required **workspaceId** and **authenticationId** parameters under the `<appSettings>`
 
-```XML
-<appSettings>
-  <add key="serilog:using:AzureLogAnalytics" value="Serilog.Sinks.AzureAnalytics" />
-  <add key="serilog:write-to:AzureLogAnalytics.workspaceId" value="*************" />
-  <add key="serilog:write-to:AzureLogAnalytics.authenticationId" value="*************" />
- </appSettings>
+```JSON
+{
+ "AppSettings": {
+   "Serilog": {
+     "OMS" : {
+       "WorkspaceID" : "<GUID>",
+       "authenticationId": "<Base64>"
+     }
+   }
+ }
+}
 ```
 
 ## Performance
