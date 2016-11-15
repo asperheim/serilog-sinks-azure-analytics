@@ -21,7 +21,7 @@ var logger = new LoggerConfiguration()
     .CreateLogger();
 ```
 
-## XML <appSettings> configuration
+## JSON <appSettings> configuration
 
 To use the AzureLogAnalytics sink with the [Serilog.Settings.AppSettings](https://www.nuget.org/packages/Serilog.Settings.AppSettings) package, first install that package if you haven't already done so:
 
