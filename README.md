@@ -1,5 +1,5 @@
 # Serilog.Sinks.AzureAnalytics
-A Serilog sink that writes to Azure Log Analytics.
+A Serilog sink for .net Core that writes to Azure Log Analytics.
 
 
 ## Getting started

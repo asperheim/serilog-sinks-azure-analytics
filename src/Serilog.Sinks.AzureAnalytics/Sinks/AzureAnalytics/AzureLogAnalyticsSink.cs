@@ -14,7 +14,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,15 +114,15 @@ namespace Serilog.Sinks.AzureAnalytics
 
         private async Task PostData(string signature, string dateString, string jsonString)
         {
-            using (var client = new WebClient())
-            {
-                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                client.Headers.Add("Log-Type", _logName);
-                client.Headers.Add("Authorization", signature);
-                client.Headers.Add("x-ms-date", dateString);
-                client.Headers.Add("time-generated-field", "Timestamp");
-                await client.UploadStringTaskAsync(_analyticsUrl, "POST", jsonString).ConfigureAwait(false);
-            }
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Add("Log-Type", _logName);
+            client.DefaultRequestHeaders.Add("Authorization", signature);
+            client.DefaultRequestHeaders.Add("x-ms-date", dateString);
+            client.DefaultRequestHeaders.Add("time-generated-field", "Timestamp");
+
+            await client.PostAsync(_analyticsUrl, new StringContent(jsonString, Encoding.UTF8, "application/json"));
+
         }
     }
 }
